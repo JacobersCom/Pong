@@ -5,11 +5,13 @@ class Game
 {
 public:
 
-	void Init();
+	Game(SDL_Window* whandler, bool running, SDL_Event eventHandler): window(whandler), isRunning(running), event(eventHandler){}
 
-	void Start();
+	int Init();
 
-	void Stop();
+	void Start_Game();
+
+	void Stop_Game();
 
 private:
 
