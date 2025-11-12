@@ -5,6 +5,12 @@ Game::Game() {
 	window = nullptr;
 	renderer = nullptr;
 	isRunning = true;
+
+	paddlePos.x = 10;
+	paddlePos.y = 225;
+
+	ballPos.x = 250;
+	ballPos.y = 250;
 }
 
 bool Game::Init() {
@@ -82,6 +88,24 @@ void Game::ProcessInput()
 
 void Game::GenerateOutPut()
 {
+
+	SDL_FRect wall
+	{
+		paddlePos.x,
+		paddlePos.y,
+		thickeness,
+		100
+
+	};
+	SDL_FRect ball
+	{
+		(ballPos.x - thickeness / 2),
+		(ballPos.y - thickeness / 2),
+		thickeness,
+		thickeness
+
+	};
+
 	SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
 
 	//Clears backbuffer for the current draw color
@@ -91,5 +115,7 @@ void Game::GenerateOutPut()
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
 	SDL_RenderFillRect(renderer, &wall);
+	SDL_RenderFillRect(renderer, &ball);
+
 	SDL_RenderPresent(renderer);
 }

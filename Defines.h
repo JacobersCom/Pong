@@ -7,3 +7,9 @@ constexpr int screenW = 500;
 
 //Thickeness of wall
 constexpr int thickeness = 15;
+
+struct vector2 
+{
+	float x;
+	float y;
+};
