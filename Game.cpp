@@ -30,9 +30,9 @@ void Game::GameLoop()
 
 	while (isRunning) {
 
-		/*ProcessInput();
-		UpdateGame();
-		GenerateOutPut();*/
+		ProcessInput();
+		//UpdateGame();
+		//GenerateOutPut();
 	}
 }
 
@@ -41,4 +41,33 @@ void Game::ShutDown()
 	SDL_DestroyWindow(window);
 	
 	SDL_Quit();
+}
+
+void Game::ProcessInput()
+{
+	SDL_Event event;
+	while (SDL_PollEvent(&event)) {
+
+		switch (event.type) 
+		{
+			case SDL_EVENT_QUIT:
+			{
+				isRunning = false;
+				break;
+
+			}
+			case SDL_EVENT_KEY_DOWN:
+			{
+				const bool* keyState = SDL_GetKeyboardState(NULL);
+
+				if (keyState[SDL_SCANCODE_ESCAPE])
+				{
+					isRunning = false;
+				}
+				
+			}
+			
+
+		}
+	}
 }
