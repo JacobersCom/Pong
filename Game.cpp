@@ -22,7 +22,11 @@ bool Game::Init() {
 	}
 
 	renderer = SDL_CreateRenderer(window, NULL);
-
+	if (!renderer)
+	{
+		SDL_Log("ERROR: Failed to init renderer %s\n", SDL_GetError());
+		return false;
+	}
 
 	return true;
 
@@ -35,14 +39,15 @@ void Game::GameLoop()
 
 		ProcessInput();
 		//UpdateGame();
-		//GenerateOutPut();
+		GenerateOutPut();
 	}
 }
 
 void Game::ShutDown()
 {
 	SDL_DestroyWindow(window);
-	
+	SDL_DestroyRenderer(renderer);
+
 	SDL_Quit();
 }
 
@@ -73,4 +78,14 @@ void Game::ProcessInput()
 
 		}
 	}
+}
+
+void Game::GenerateOutPut()
+{
+	SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+
+	//Clears backbuffer for the current draw color
+	SDL_RenderClear(renderer);
+
+	SDL_RenderPresent(renderer);
 }
