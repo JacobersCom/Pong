@@ -4,4 +4,6 @@
 
 constexpr int screenH = 500;
 constexpr int screenW = 500;
-int* Keys = new int(104);
+
+//Thickeness of wall
+constexpr int thickeness = 15;

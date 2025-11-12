@@ -1,9 +1,9 @@
 #include "Game.h"
-#include "Defines.h"
 
 Game::Game() {
 
 	window = nullptr;
+	renderer = nullptr;
 	isRunning = true;
 }
 
@@ -14,7 +14,7 @@ bool Game::Init() {
 		return false;
 	};
 
-	window = SDL_CreateWindow("Pong", screenW, screenH, 0);
+	window = SDL_CreateWindow("Pong", screenW, screenH, SDL_WINDOW_RESIZABLE);
 
 	if (!window) {
 		SDL_Log("ERROR: Failed to create window %s\n", SDL_GetError());
@@ -87,5 +87,9 @@ void Game::GenerateOutPut()
 	//Clears backbuffer for the current draw color
 	SDL_RenderClear(renderer);
 
+
+	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+
+	SDL_RenderFillRect(renderer, &wall);
 	SDL_RenderPresent(renderer);
 }
