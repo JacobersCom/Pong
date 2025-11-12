@@ -10,16 +10,19 @@ Game::Game() {
 bool Game::Init() {
 	
 	if (!SDL_Init(SDL_INIT_VIDEO)) {
-		SDL_Log("ERROR:Failed to init SDL video: %s\n", SDL_GetError);
+		SDL_Log("ERROR: Failed to init SDL video %s\n", SDL_GetError());
 		return false;
 	};
 
 	window = SDL_CreateWindow("Pong", screenW, screenH, 0);
 
-	if (window == nullptr) {
-		SDL_Log("ERROR:Failed to create window: %s\n", SDL_GetError);
+	if (!window) {
+		SDL_Log("ERROR: Failed to create window %s\n", SDL_GetError());
 		return false;
 	}
+
+	renderer = SDL_CreateRenderer(window, NULL);
+
 
 	return true;
 
