@@ -1,23 +1,29 @@
 #pragma once
 #include "SDL3/SDL.h"
 
+
 class Game
 {
 public:
 
-	Game(SDL_Window* whandler, bool running, SDL_Event eventHandler): window(whandler), isRunning(running), event(eventHandler){}
+	Game();
+	
+	bool Init();
 
-	int Init();
+	void GameLoop();
 
-	void Start_Game();
-
-	void Stop_Game();
+	void ShutDown();
 
 private:
+	
+	void ProcessInput();
+
+	void UpdateGame();
+
+	void GenerateOutPut();
+
 
 	SDL_Window* window;
 	bool isRunning;
-	SDL_Event event;
-
 };
 

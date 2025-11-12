@@ -6,16 +6,17 @@
 //Everything should be a service.
 
 int main() {
+
+	Game game;
+
+	bool success = game.Init();
 	
+	if (success) {
+		
+		game.GameLoop();
+	}
 
-
-	Game game();
-
-	game.Init();
-	
-
-	game.Start_Game();
-	game.Stop_Game();
+	game.ShutDown();
 
 	return 0;
 }
