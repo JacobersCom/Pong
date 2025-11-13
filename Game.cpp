@@ -8,9 +8,12 @@ Game::Game() {
 
 	paddlePos.x = 10;
 	paddlePos.y = 225;
+	paddleDir = 0.0f;
 
 	ballPos.x = 250;
 	ballPos.y = 250;
+
+	ticksCount = 0;
 }
 
 bool Game::Init() {
@@ -28,6 +31,7 @@ bool Game::Init() {
 	}
 
 	renderer = SDL_CreateRenderer(window, NULL);
+	
 	if (!renderer)
 	{
 		SDL_Log("ERROR: Failed to init renderer %s\n", SDL_GetError());
@@ -44,7 +48,7 @@ void Game::GameLoop()
 	while (isRunning) {
 
 		ProcessInput();
-		//UpdateGame();
+		UpdateGame();
 		GenerateOutPut();
 	}
 }
@@ -78,11 +82,56 @@ void Game::ProcessInput()
 				{
 					isRunning = false;
 				}
+				if (keyState[SDL_SCANCODE_W])
+				{
+					paddleDir -= 1;
+				}
+				if (keyState[SDL_SCANCODE_S])
+				{
+					paddleDir += 1;
+				}
+				
 				
 			}
 			
 
 		}
+	}
+}
+
+//Comparing old frames againest new frames in seconds
+void Game::UpdateGame()
+{
+	//Wait 16 ms from the last frame
+	
+	while (!TICKS_PASSED(SDL_GetTicks(), ticksCount + 16));
+	//The difference in ticks from the last frame
+	float deltaTime = (SDL_GetTicks() - ticksCount) / 1000.0f;
+	//Update count for next frame
+	ticksCount = SDL_GetTicks();
+
+
+	//Clamp so time never jumps to far forward
+	if (deltaTime > 0.05)
+	{
+		deltaTime = 0.05;
+	}
+
+	if (paddleDir != 0) {
+		//moves up at 300 pixels a second
+		paddlePos.y = paddleDir * 300.0f * deltaTime;
+
+		//up off the screen
+		if (paddlePos.y < (paddleH / 2.0f + paddleW))
+		{
+			paddlePos.y = paddleH / 2.0f + paddleW;
+		}
+		//down off the screen
+		else if (paddlePos.y > (screenH - paddleH / 2.0f - paddleW))
+		{
+			paddlePos.y = (screenH - paddleH / 2.0f - paddleW);
+		}
+
 	}
 }
 
@@ -93,16 +142,16 @@ void Game::GenerateOutPut()
 	{
 		paddlePos.x,
 		paddlePos.y,
-		thickeness,
-		100
+		paddleW,
+		paddleH
 
 	};
 	SDL_FRect ball
 	{
-		(ballPos.x - thickeness / 2),
-		(ballPos.y - thickeness / 2),
-		thickeness,
-		thickeness
+		(ballPos.x - paddleW / 2),
+		(ballPos.y - paddleW / 2),
+		paddleW,
+		paddleW
 
 	};
 

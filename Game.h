@@ -26,8 +26,13 @@ private:
 
 	SDL_Window* window;
 	SDL_Renderer* renderer;
+	
 	vector2 paddlePos;
+	float paddleDir;
+
 	vector2 ballPos;
+	
+	Uint64 ticksCount;
 	
 	bool isRunning;
 };
