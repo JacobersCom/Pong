@@ -1,23 +1,36 @@
 #include "Game.h"
-#include "Defines.h"
 
 Game::Game() {
 
 	window = nullptr;
+	renderer = nullptr;
 	isRunning = true;
+
+	paddlePos.x = 10;
+	paddlePos.y = 225;
+
+	ballPos.x = 250;
+	ballPos.y = 250;
 }
 
 bool Game::Init() {
 	
 	if (!SDL_Init(SDL_INIT_VIDEO)) {
-		SDL_Log("ERROR:Failed to init SDL video: %s\n", SDL_GetError);
+		SDL_Log("ERROR: Failed to init SDL video %s\n", SDL_GetError());
 		return false;
 	};
 
-	window = SDL_CreateWindow("Pong", screenW, screenH, 0);
+	window = SDL_CreateWindow("Pong", screenW, screenH, SDL_WINDOW_RESIZABLE);
 
-	if (window == nullptr) {
-		SDL_Log("ERROR:Failed to create window: %s\n", SDL_GetError);
+	if (!window) {
+		SDL_Log("ERROR: Failed to create window %s\n", SDL_GetError());
+		return false;
+	}
+
+	renderer = SDL_CreateRenderer(window, NULL);
+	if (!renderer)
+	{
+		SDL_Log("ERROR: Failed to init renderer %s\n", SDL_GetError());
 		return false;
 	}
 
@@ -30,15 +43,79 @@ void Game::GameLoop()
 
 	while (isRunning) {
 
-		/*ProcessInput();
-		UpdateGame();
-		GenerateOutPut();*/
+		ProcessInput();
+		//UpdateGame();
+		GenerateOutPut();
 	}
 }
 
 void Game::ShutDown()
 {
 	SDL_DestroyWindow(window);
-	
+	SDL_DestroyRenderer(renderer);
+
 	SDL_Quit();
+}
+
+void Game::ProcessInput()
+{
+	SDL_Event event;
+	while (SDL_PollEvent(&event)) {
+
+		switch (event.type) 
+		{
+			case SDL_EVENT_QUIT:
+			{
+				isRunning = false;
+				break;
+
+			}
+			case SDL_EVENT_KEY_DOWN:
+			{
+				const bool* keyState = SDL_GetKeyboardState(NULL);
+
+				if (keyState[SDL_SCANCODE_ESCAPE])
+				{
+					isRunning = false;
+				}
+				
+			}
+			
+
+		}
+	}
+}
+
+void Game::GenerateOutPut()
+{
+
+	SDL_FRect wall
+	{
+		paddlePos.x,
+		paddlePos.y,
+		thickeness,
+		100
+
+	};
+	SDL_FRect ball
+	{
+		(ballPos.x - thickeness / 2),
+		(ballPos.y - thickeness / 2),
+		thickeness,
+		thickeness
+
+	};
+
+	SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+
+	//Clears backbuffer for the current draw color
+	SDL_RenderClear(renderer);
+
+
+	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+
+	SDL_RenderFillRect(renderer, &wall);
+	SDL_RenderFillRect(renderer, &ball);
+
+	SDL_RenderPresent(renderer);
 }

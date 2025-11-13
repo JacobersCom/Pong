@@ -1,5 +1,7 @@
 #pragma once
 #include "SDL3/SDL.h"
+#include "Defines.h"
+
 
 
 class Game
@@ -22,8 +24,11 @@ private:
 
 	void GenerateOutPut();
 
-
 	SDL_Window* window;
+	SDL_Renderer* renderer;
+	vector2 paddlePos;
+	vector2 ballPos;
+	
 	bool isRunning;
 };
 
