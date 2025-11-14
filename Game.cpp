@@ -148,7 +148,6 @@ void Game::UpdateGame()
 
 	
 	
-	
 		ballPos.x += ballVel.x * deltaTime;
 		ballPos.y += ballVel.y * deltaTime;
 		
@@ -189,10 +188,13 @@ void Game::UpdateGame()
 
 
 		}
+		
+		float diff = player1Pos.y - ballPos.y;
+		diff = (diff > 0) ? diff : -diff;
 
-		if (ballPos.y < (paddleW / 2.0 + paddleW))
+		if (ballPos.y <= wallW)
 		{
-			ballPos.y = (paddleW / 2.0 + paddleW);
+			ballPos.y = wallW;
 		}
 		
 		else if (ballPos.y > (screenH - paddleH / 2))
@@ -200,10 +202,27 @@ void Game::UpdateGame()
 			ballPos.y = (screenH - paddleH / 2);
 		}
 		
+		
+		
 }
 
 void Game::GenerateOutPut()
 {
+	SDL_FRect topWall
+	{
+		0,
+		0,
+		wallW,
+		wallH
+	};
+	SDL_FRect bottomWall
+	{
+		0,
+		500,
+		wallW,
+		wallH
+	};
+
 
 	SDL_FRect player1
 	{
@@ -238,11 +257,17 @@ void Game::GenerateOutPut()
 	SDL_RenderClear(renderer);
 
 
-	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
+	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 	SDL_RenderFillRect(renderer, &player1);
 	SDL_RenderFillRect(renderer, &player2);
 	SDL_RenderFillRect(renderer, &ball);
+
+	SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+	SDL_RenderFillRect(renderer, &topWall);
+	SDL_RenderFillRect(renderer, &bottomWall);
+
+
 
 	SDL_RenderPresent(renderer);
 }
