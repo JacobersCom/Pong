@@ -9,7 +9,7 @@ class Game
 public:
 
 	Game();
-	
+
 	bool Init();
 
 	void GameLoop();
@@ -17,7 +17,7 @@ public:
 	void ShutDown();
 
 private:
-	
+
 	void ProcessInput();
 
 	void UpdateGame();
@@ -26,14 +26,18 @@ private:
 
 	SDL_Window* window;
 	SDL_Renderer* renderer;
-	
-	vector2 paddlePos;
-	float paddleDir;
+
+	vector2 player1Pos;
+	vector2 player2Pos;
+
+	float player1Dir;
+	float player2Dir;
+
 
 	vector2 ballPos;
-	
+
 	Uint64 ticksCount;
-	
+
 	bool isRunning;
 };
 

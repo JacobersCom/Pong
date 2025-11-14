@@ -6,9 +6,14 @@ Game::Game() {
 	renderer = nullptr;
 	isRunning = true;
 
-	paddlePos.x = 10;
-	paddlePos.y = 225;
-	paddleDir = 0.0f;
+	player1Pos.x = 10;
+	player1Pos.y = 225;
+	player2Pos.x = 475;
+	player2Pos.y = 225;
+
+	player1Dir = 0.0f;
+	player2Dir = 0.0f;
+
 
 	ballPos.x = 250;
 	ballPos.y = 250;
@@ -78,17 +83,30 @@ void Game::ProcessInput()
 			{
 				const bool* keyState = SDL_GetKeyboardState(NULL);
 
+				//Quit
 				if (keyState[SDL_SCANCODE_ESCAPE])
 				{
 					isRunning = false;
 				}
+				
+				//Player 1 movement
 				if (keyState[SDL_SCANCODE_W])
 				{
-					paddleDir -= 1;
+					player1Dir -= 1;
 				}
 				if (keyState[SDL_SCANCODE_S])
 				{
-					paddleDir += 1;
+					player1Dir += 1;
+				}
+
+				//Player 2 movement
+				if (keyState[SDL_SCANCODE_I]) 
+				{
+					player2Dir -= 1;
+				}
+				if(keyState[SDL_SCANCODE_J])
+				{
+					player2Dir += 1;
 				}
 				
 				
@@ -112,24 +130,41 @@ void Game::UpdateGame()
 
 
 	//Clamp so time never jumps to far forward
-	if (deltaTime > 0.05)
+	if (deltaTime > 0.05f)
 	{
-		deltaTime = 0.05;
+		deltaTime = 0.05f;
 	}
 
-	if (paddleDir != 0) {
+	if (player1Dir != 0) {
 		//moves up at 300 pixels a second
-		paddlePos.y = paddleDir * 300.0f * deltaTime;
+		player1Pos.y = player1Dir * 300.0f * deltaTime;
 
 		//up off the screen
-		if (paddlePos.y < (paddleH / 2.0f + paddleW))
+		if (player1Pos.y < (paddleH / 2.0f + paddleW))
 		{
-			paddlePos.y = paddleH / 2.0f + paddleW;
+			player1Pos.y = paddleH / 2.0f + paddleW;
 		}
 		//down off the screen
-		else if (paddlePos.y > (screenH - paddleH / 2.0f - paddleW))
+		else if (player1Pos.y > (screenH - paddleH / 2.0f - paddleW))
 		{
-			paddlePos.y = (screenH - paddleH / 2.0f - paddleW);
+			player1Pos.y = (screenH - paddleH / 2.0f - paddleW);
+		}
+
+	}
+
+	if (player2Dir != 0) {
+		//moves up at 300 pixels a second
+		player2Pos.y = player2Dir * 300.0f * deltaTime;
+
+		//up off the screen
+		if (player2Pos.y < (paddleH / 2.0f + paddleW))
+		{
+			player2Pos.y = paddleH / 2.0f + paddleW;
+		}
+		//down off the screen
+		else if (player2Pos.y > (screenH - paddleH / 2.0f - paddleW))
+		{
+			player2Pos.y = (screenH - paddleH / 2.0f - paddleW);
 		}
 
 	}
@@ -138,14 +173,24 @@ void Game::UpdateGame()
 void Game::GenerateOutPut()
 {
 
-	SDL_FRect wall
+	SDL_FRect player1
 	{
-		paddlePos.x,
-		paddlePos.y,
+		player1Pos.x,
+		player1Pos.y,
 		paddleW,
 		paddleH
 
 	};
+
+	SDL_FRect player2
+	{
+			player2Pos.x,
+			player2Pos.y,
+			paddleW,
+			paddleH
+
+	};
+
 	SDL_FRect ball
 	{
 		(ballPos.x - paddleW / 2),
@@ -163,7 +208,8 @@ void Game::GenerateOutPut()
 
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
-	SDL_RenderFillRect(renderer, &wall);
+	SDL_RenderFillRect(renderer, &player1);
+	SDL_RenderFillRect(renderer, &player2);
 	SDL_RenderFillRect(renderer, &ball);
 
 	SDL_RenderPresent(renderer);
