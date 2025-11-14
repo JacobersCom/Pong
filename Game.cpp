@@ -18,7 +18,13 @@ Game::Game() {
 	ballPos.x = 250;
 	ballPos.y = 250;
 
+	//Vel in pixels
+	ballVel.x = -60.0f;
+	ballVel.y = 60.0f;
+
 	ticksCount = 0;
+
+	GameStart = false;
 }
 
 bool Game::Init() {
@@ -109,6 +115,10 @@ void Game::ProcessInput()
 					player2Dir += 1;
 				}
 				
+				if(keyState[SDL_SCANCODE_1])
+				{
+					GameStart = true;
+				}
 				
 			}
 			
@@ -120,6 +130,7 @@ void Game::ProcessInput()
 //Comparing old frames againest new frames in seconds
 void Game::UpdateGame()
 {
+
 	//Wait 16 ms from the last frame
 	
 	while (!TICKS_PASSED(SDL_GetTicks(), ticksCount + 16));
@@ -135,39 +146,60 @@ void Game::UpdateGame()
 		deltaTime = 0.05f;
 	}
 
-	if (player1Dir != 0) {
-		//moves up at 300 pixels a second
-		player1Pos.y = player1Dir * 300.0f * deltaTime;
+	
+	
+	
+		ballPos.x += ballVel.x * deltaTime;
+		ballPos.y += ballVel.y * deltaTime;
+		
+		//Is the ball calliding with the top of the wall and moving up?
+		
 
-		//up off the screen
-		if (player1Pos.y < (paddleH / 2.0f + paddleW))
-		{
-			player1Pos.y = paddleH / 2.0f + paddleW;
-		}
-		//down off the screen
-		else if (player1Pos.y > (screenH - paddleH / 2.0f - paddleW))
-		{
-			player1Pos.y = (screenH - paddleH / 2.0f - paddleW);
-		}
+		if (player1Dir != 0) {
+			//moves up at 300 pixels a second
+			player1Pos.y = player1Dir * 300.0f * deltaTime;
 
-	}
+			//up off the screen
+			if (player1Pos.y < (paddleH / 2.0f + paddleW))
+			{
+				player1Pos.y = paddleH / 2.0f + paddleW;
+			}
+			//down off the screen
+			else if (player1Pos.y > (screenH - paddleH / 2.0f - paddleW))
+			{
+				player1Pos.y = (screenH - paddleH / 2.0f - paddleW);
+			}
 
-	if (player2Dir != 0) {
-		//moves up at 300 pixels a second
-		player2Pos.y = player2Dir * 300.0f * deltaTime;
-
-		//up off the screen
-		if (player2Pos.y < (paddleH / 2.0f + paddleW))
-		{
-			player2Pos.y = paddleH / 2.0f + paddleW;
-		}
-		//down off the screen
-		else if (player2Pos.y > (screenH - paddleH / 2.0f - paddleW))
-		{
-			player2Pos.y = (screenH - paddleH / 2.0f - paddleW);
 		}
 
-	}
+		if (player2Dir != 0) {
+			//moves up at 300 pixels a second
+			player2Pos.y = player2Dir * 300.0f * deltaTime;
+
+			//up off the screen
+			if (player2Pos.y < (paddleH / 2.0f + paddleW))
+			{
+				player2Pos.y = paddleH / 2.0f + paddleW;
+			}
+			//down off the screen
+			else if (player2Pos.y > (screenH - paddleH / 2.0f - paddleW))
+			{
+				player2Pos.y = (screenH - paddleH / 2.0f - paddleW);
+			}
+
+
+		}
+
+		if (ballPos.y < (paddleW / 2.0 + paddleW))
+		{
+			ballPos.y = (paddleW / 2.0 + paddleW);
+		}
+		
+		else if (ballPos.y > (screenH - paddleH / 2))
+		{
+			ballPos.y = (screenH - paddleH / 2);
+		}
+		
 }
 
 void Game::GenerateOutPut()

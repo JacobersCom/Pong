@@ -35,9 +35,11 @@ private:
 
 
 	vector2 ballPos;
+	vector2 ballVel;
 
 	Uint64 ticksCount;
 
+	bool GameStart;
 	bool isRunning;
 };
 
