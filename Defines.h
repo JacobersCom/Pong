@@ -8,7 +8,7 @@ constexpr int screenW = 500;
 
 constexpr int wallW = 500;
 constexpr int wallH = 5;
-
+ 
 constexpr int paddleW = 15;
 constexpr int paddleH = 100;
 
