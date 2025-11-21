@@ -192,7 +192,7 @@ void Game::UpdateGame()
 		float diff = player1Pos.y - ballPos.y;
 		diff = (diff > 0) ? diff : -diff;
 
-		if (diff <= player1Pos.y / 2.0
+		if (diff <= player1Pos.y
 			&& ballPos.x < 25.0f
 			&& ballPos.x > 20.0f
 			&& ballVel.x < 0.0f)
@@ -200,7 +200,7 @@ void Game::UpdateGame()
 			ballVel.x *= -1.0f;
 		}
 		
-		if (diff <= player2Pos.y / 2.0
+		if (diff <= player2Pos.y
 			&& ballPos.x < 475.0f
 			&& ballPos.x > 470.0f
 			&& ballVel.x > 0.0f)
