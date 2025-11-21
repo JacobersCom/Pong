@@ -41,5 +41,21 @@ private:
 
 	bool GameStart;
 	bool isRunning;
+
+	SDL_FRect topWall
+	{
+		0,
+		0,
+		wallW,
+		wallH
+	};
+	SDL_FRect bottomWall
+	{
+		0,
+		500,
+		wallW,
+		wallH
+	};
+
 };
 

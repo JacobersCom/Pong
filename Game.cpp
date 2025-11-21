@@ -20,7 +20,7 @@ Game::Game() {
 
 	//Vel in pixels
 	ballVel.x = -60;
-	ballVel.y = 0;
+	ballVel.y = 60;
 
 	ticksCount = 0;
 
@@ -34,7 +34,7 @@ bool Game::Init() {
 		return false;
 	};
 
-	window = SDL_CreateWindow("Pong", screenW, screenH, SDL_WINDOW_RESIZABLE);
+	window = SDL_CreateWindow("Pong", screenW, screenH, NULL);
 
 	if (!window) {
 		SDL_Log("ERROR: Failed to create window %s\n", SDL_GetError());
@@ -159,14 +159,14 @@ void Game::UpdateGame()
 			player1Pos.y = player1Dir * 300.0f * deltaTime;
 
 			//up off the screen
-			if (player1Pos.y < (paddleH / 2.0f + paddleW))
+			if (player1Pos.y < (paddleH / 3.0f + paddleW))
 			{
-				player1Pos.y = paddleH / 2.0f + paddleW;
+				player1Pos.y = paddleH / 3.0f + paddleW;
 			}
 			//down off the screen
-			else if (player1Pos.y > (screenH - paddleH / 2.0f - paddleW))
+			else if (player1Pos.y > (screenH - paddleH / 3.0f - paddleW))
 			{
-				player1Pos.y = (screenH - paddleH / 2.0f - paddleW);
+				player1Pos.y = (screenH - paddleH / 3.0f - paddleW);
 			}
 
 		}
@@ -176,9 +176,9 @@ void Game::UpdateGame()
 			player2Pos.y = player2Dir * 300.0f * deltaTime;
 
 			//up off the screen
-			if (player2Pos.y < (paddleH / 2.0f + paddleW))
+			if (player2Pos.y < (paddleH / 3.0f + paddleW))
 			{
-				player2Pos.y = paddleH / 2.0f + paddleW;
+				player2Pos.y = paddleH / 3.0f + paddleW;
 			}
 			//down off the screen
 			else if (player2Pos.y > (screenH - paddleH / 2.0f - paddleW))
@@ -200,34 +200,24 @@ void Game::UpdateGame()
 			ballVel.x *= -1.0f;
 		}
 		
-		if (diff <= player2Pos.y
+		if (diff >= player2Pos.y
 			&& ballPos.x < 475.0f
 			&& ballPos.x > 470.0f
 			&& ballVel.x > 0.0f)
 		{
 			ballVel.x *= -1.0f;
 		}
-		
+		std::cout << ballPos.x << std::endl;
+		if (ballPos.y >= bottomWall.y) 
+		{
+			ballVel.y *= -1.0f;
+		}
 		
 }
 
 void Game::GenerateOutPut()
 {
-	SDL_FRect topWall
-	{
-		0,
-		0,
-		wallW,
-		wallH
-	};
-	SDL_FRect bottomWall
-	{
-		0,
-		500,
-		wallW,
-		wallH
-	};
-
+	
 
 	SDL_FRect player1
 	{
