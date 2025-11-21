@@ -20,7 +20,7 @@ Game::Game() {
 
 	//Vel in pixels
 	ballVel.x = -60;
-	ballVel.y = 60;
+	ballVel.y = 50;
 
 	ticksCount = 0;
 
@@ -189,10 +189,10 @@ void Game::UpdateGame()
 
 		}
 		
-		float diff = player1Pos.y - ballPos.y;
-		diff = (diff > 0) ? diff : -diff;
+		float diffPlayer1 = player1Pos.y - ballPos.y;
+		diffPlayer1 = (diffPlayer1 > 0) ? diffPlayer1 : -diffPlayer1;
 
-		if (diff <= player1Pos.y
+		if (diffPlayer1 <= player1Pos.y
 			&& ballPos.x < 25.0f
 			&& ballPos.x > 20.0f
 			&& ballVel.x < 0.0f)
@@ -200,15 +200,24 @@ void Game::UpdateGame()
 			ballVel.x *= -1.0f;
 		}
 		
-		if (diff >= player2Pos.y
+		float diffPlayer2 = player2Pos.y - ballPos.y;
+		diffPlayer2 = (diffPlayer2 > 0) ? diffPlayer2 : -diffPlayer2;
+
+		if (diffPlayer2 <= player2Pos.y
 			&& ballPos.x < 475.0f
 			&& ballPos.x > 470.0f
 			&& ballVel.x > 0.0f)
 		{
 			ballVel.x *= -1.0f;
+			std::cout << ballPos.x << std::endl;
 		}
-		std::cout << ballPos.x << std::endl;
+		
 		if (ballPos.y >= bottomWall.y) 
+		{
+			ballVel.y *= -1.0f;
+		}
+
+		if (ballPos.y <= topWall.y)
 		{
 			ballVel.y *= -1.0f;
 		}
