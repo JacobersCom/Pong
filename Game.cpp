@@ -227,10 +227,12 @@ void Game::UpdateGame()
 		if (ballPos.x > screenW)
 		{
 			//player one wins
+			isRunning = false;
 		}
 		else
 		{
 			//player two wins
+			isRunning = false;
 		}
 
 }
