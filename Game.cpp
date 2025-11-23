@@ -224,6 +224,15 @@ void Game::UpdateGame()
 			ballVel.y *= -1.0f;
 		}
 		
+		if (ballPos.x > screenW)
+		{
+			//player one wins
+		}
+		else
+		{
+			//player two wins
+		}
+
 }
 
 void Game::GenerateOutPut()
