@@ -20,7 +20,7 @@ Game::Game() {
 
 	//Vel in pixels
 	ballVel.x = 100;
-	ballVel.y = 0;
+	ballVel.y = -100;
 
 	ticksCount = 0;
 
@@ -229,7 +229,7 @@ void Game::UpdateGame()
 			//player one wins
 			isRunning = false;
 		}
-		else
+		else if(ballPos.x < 0.0f)
 		{
 			//player two wins
 			isRunning = false;
