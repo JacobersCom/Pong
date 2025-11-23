@@ -19,8 +19,8 @@ Game::Game() {
 	ballPos.y = 250;
 
 	//Vel in pixels
-	ballVel.x = -60;
-	ballVel.y = 50;
+	ballVel.x = 100;
+	ballVel.y = 0;
 
 	ticksCount = 0;
 
@@ -156,60 +156,62 @@ void Game::UpdateGame()
 
 		if (player1Dir != 0) {
 			//moves up at 300 pixels a second
-			player1Pos.y = player1Dir * 300.0f * deltaTime;
+			player1Pos.y += player1Dir * 300.0f * deltaTime;
 
 			//up off the screen
-			if (player1Pos.y < (paddleH / 3.0f + paddleW))
-			{
-				player1Pos.y = paddleH / 3.0f + paddleW;
-			}
-			//down off the screen
-			else if (player1Pos.y > (screenH - paddleH / 3.0f - paddleW))
-			{
-				player1Pos.y = (screenH - paddleH / 3.0f - paddleW);
-			}
-
 		}
+		
+		if (player1Pos.y < (paddleH / 3.0f + paddleW))
+		{
+			player1Pos.y += paddleH / 3.0f + paddleW;
+		}
+		//down off the screen
+		else if (player1Pos.y > (screenH - paddleH / 3.0f - paddleW))
+		{
+			player1Pos.y += (screenH - paddleH / 3.0f - paddleW);
+		}
+
 
 		if (player2Dir != 0) {
 			//moves up at 300 pixels a second
 			player2Pos.y = player2Dir * 300.0f * deltaTime;
-
-			//up off the screen
-			if (player2Pos.y < (paddleH / 3.0f + paddleW))
-			{
-				player2Pos.y = paddleH / 3.0f + paddleW;
-			}
-			//down off the screen
-			else if (player2Pos.y > (screenH - paddleH / 2.0f - paddleW))
-			{
-				player2Pos.y = (screenH - paddleH / 2.0f - paddleW);
-			}
-
-
 		}
+		//up off the screen
+		if (player2Pos.y < (paddleH / 3.0f + paddleW))
+		{
+			player2Pos.y += paddleH / 3.0f + paddleW;
+		}
+		//down off the screen
+		else if (player2Pos.y > (screenH - paddleH / 2.0f - paddleW))
+		{
+			player2Pos.y += (screenH - paddleH / 2.0f - paddleW);
+		}
+
 		
-		float diffPlayer1 = player1Pos.y - ballPos.y;
+		float diffPlayer1 = ballPos.y - player1Pos.y;
 		diffPlayer1 = (diffPlayer1 > 0) ? diffPlayer1 : -diffPlayer1;
 
-		if (diffPlayer1 <= player1Pos.y
+		//If the diff is not great than the paddle's height negate.
+		if (diffPlayer1 <= paddleH
 			&& ballPos.x < 25.0f
 			&& ballPos.x > 20.0f
 			&& ballVel.x < 0.0f)
 		{
 			ballVel.x *= -1.0f;
+			
 		}
 		
 		float diffPlayer2 = player2Pos.y - ballPos.y;
 		diffPlayer2 = (diffPlayer2 > 0) ? diffPlayer2 : -diffPlayer2;
-
-		if (diffPlayer2 <= player2Pos.y
+		
+		//If the diff is not great than the paddle's height negate.
+		if (diffPlayer2 <= paddleH
 			&& ballPos.x < 475.0f
 			&& ballPos.x > 470.0f
 			&& ballVel.x > 0.0f)
 		{
 			ballVel.x *= -1.0f;
-			std::cout << ballPos.x << std::endl;
+			
 		}
 		
 		if (ballPos.y >= bottomWall.y) 
