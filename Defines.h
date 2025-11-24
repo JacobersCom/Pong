@@ -1,5 +1,8 @@
 #pragma once
 #include <iostream>
+#include "SDL3/SDL.h"
+#include "SDL3_ttf/SDL_ttf.h"
+
 
 #define TICKS_PASSED(A, B)  ((Sint32)((B) - (A)) <= 0)
 

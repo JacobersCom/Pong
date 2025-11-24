@@ -1,4 +1,4 @@
-#include "SDL3/SDL.h"
+
 #include "Game.h"
 //Create a rendering service and a game loop. Make then in singletons
 //Then Create a defines file which will hold things like types and #defines
