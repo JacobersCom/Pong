@@ -46,16 +46,15 @@ bool Game::Init() {
 		SDL_Log("ERROR: Failed to init text system %s \n", SDL_GetError());
 		return false;
 	}
-	else
+	TTF_Font* font = TTF_OpenFont("D:\Pong\FiraCodeNerdFontPropo-Retina", 64);
+	if(!font)
 	{
-		TTF_Font* font = TTF_OpenFont("D:\Pong\FiraCodeNerdFontPropo-Retina", 64);
-		if (!font)
-		{
-			SDL_Log("ERROR: Failed to open path to font %s\n", SDL_GetError);
-			return false
-		}
+		SDL_Log("ERROR: Failed to open path to font %s\n", SDL_GetError);
+		return false;
 	}
-
+	//Take notes on what these do
+	SDL_Surface* surface = TTF_RenderText_Solid(font, "HELLO", 5, textColor);
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
 	renderer = SDL_CreateRenderer(window, NULL);
 	
 	if (!renderer)
@@ -84,6 +83,7 @@ void Game::ShutDown()
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 
+	TTF_Quit();
 	SDL_Quit();
 }
 
@@ -242,6 +242,7 @@ void Game::UpdateGame()
 		if (ballPos.x > screenW)
 		{
 			//player one wins
+			
 			isRunning = false;
 		}
 		else if(ballPos.x < 0.0f)
