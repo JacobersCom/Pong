@@ -41,6 +41,21 @@ bool Game::Init() {
 		return false;
 	}
 
+	if (!TTF_Init())
+	{
+		SDL_Log("ERROR: Failed to init text system %s \n", SDL_GetError());
+		return false;
+	}
+	else
+	{
+		TTF_Font* font = TTF_OpenFont("D:\Pong\FiraCodeNerdFontPropo-Retina", 64);
+		if (!font)
+		{
+			SDL_Log("ERROR: Failed to open path to font %s\n", SDL_GetError);
+			return false
+		}
+	}
+
 	renderer = SDL_CreateRenderer(window, NULL);
 	
 	if (!renderer)
