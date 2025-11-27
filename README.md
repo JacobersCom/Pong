@@ -5,6 +5,8 @@ I made this game for fun because I was bored one day and wanted to stop using ga
 
 ## Demo
  ![Pong](pong.png)
+
+
 All the code is written in C++ and rendering is done with SDL3.
 The game does not start till the user presses 1, than the ball will begin to move to the top right of the screen.
 The left paddle can be moved with W and S, while the right paddle can move with I and J.
