@@ -134,7 +134,8 @@ void Game::UpdateGame()
 {
 
 	//Wait 16 ms from the last frame
-	
+	if (!GameStart) return;
+
 	while (!TICKS_PASSED(SDL_GetTicks(), ticksCount + 16));
 	//The difference in ticks from the last frame
 	float deltaTime = (SDL_GetTicks() - ticksCount) / 1000.0f;
@@ -229,14 +230,12 @@ void Game::UpdateGame()
 		if (ballPos.x > screenW)
 		{
 			//player one wins
-			//std::cout << "Left paddle wins!" << std::endl;
-			//isRunning = false;
+			isRunning = false;
 		}
 		else if(ballPos.x < 0.0f)
 		{
 			//player two wins
-			//std::cout << "Right paddle wins!" << std::endl;
-			//isRunning = false;
+			isRunning = false;
 		}
 
 }
