@@ -1,5 +1,3 @@
-# Pong[README.md](https://github.com/user-attachments/files/23781914/README.md)
-
 # Pong
 
 I made this game for fun because I was bored one day and wanted to stop using game engines to make my own games, so I took a leap of faith and learned how to make pong.
