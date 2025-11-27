@@ -13,4 +13,6 @@ The left paddle can be moved with W and S, while the right paddle can move with 
 The first play to have the play move off of THEIR SIDE OF THE SCREEN loses.
 That my friends is pong.
 
+P.S when a person wins the game the game loop stops and the window will be closed. I did not want to add text rendering to this project.
+
 
