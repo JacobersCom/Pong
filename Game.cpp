@@ -7,9 +7,9 @@ Game::Game() {
 	isRunning = true;
 
 	player1Pos.x = 10;
-	player1Pos.y = 225;
+	player1Pos.y = paddleH / 3.0f + paddleW;
 	player2Pos.x = 475;
-	player2Pos.y = 225;
+	player2Pos.y = paddleH / 3.0f + paddleW;
 
 	player1Dir = 0.0f;
 	player2Dir = 0.0f;
@@ -40,23 +40,9 @@ bool Game::Init() {
 		SDL_Log("ERROR: Failed to create window %s\n", SDL_GetError());
 		return false;
 	}
-
-	if (!TTF_Init())
-	{
-		SDL_Log("ERROR: Failed to init text system %s \n", SDL_GetError());
-		return false;
-	}
-	TTF_Font* font = TTF_OpenFont("D:\Pong\FiraCodeNerdFontPropo-Retina", 64);
-	if(!font)
-	{
-		SDL_Log("ERROR: Failed to open path to font %s\n", SDL_GetError);
-		return false;
-	}
-	//Take notes on what these do
-	SDL_Surface* surface = TTF_RenderText_Solid(font, "HELLO", 5, textColor);
-	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
-	renderer = SDL_CreateRenderer(window, NULL);
 	
+	renderer = SDL_CreateRenderer(window, NULL);
+
 	if (!renderer)
 	{
 		SDL_Log("ERROR: Failed to init renderer %s\n", SDL_GetError());
@@ -64,8 +50,10 @@ bool Game::Init() {
 	}
 
 	return true;
-
 }
+
+
+
 
 void Game::GameLoop()
 {
@@ -83,7 +71,6 @@ void Game::ShutDown()
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 
-	TTF_Quit();
 	SDL_Quit();
 }
 
@@ -171,19 +158,19 @@ void Game::UpdateGame()
 
 		if (player1Dir != 0) {
 			//moves up at 300 pixels a second
-			player1Pos.y += player1Dir * 300.0f * deltaTime;
+			player1Pos.y = player1Dir * 300.0f * deltaTime;
 
-			//up off the screen
 		}
 		
+		//up off the screen
 		if (player1Pos.y < (paddleH / 3.0f + paddleW))
 		{
-			player1Pos.y += paddleH / 3.0f + paddleW;
+			player1Pos.y = paddleH / 3.0f + paddleW;
 		}
 		//down off the screen
 		else if (player1Pos.y > (screenH - paddleH / 3.0f - paddleW))
 		{
-			player1Pos.y += (screenH - paddleH / 3.0f - paddleW);
+			player1Pos.y = (screenH - paddleH / 3.0f - paddleW);
 		}
 
 
@@ -194,12 +181,12 @@ void Game::UpdateGame()
 		//up off the screen
 		if (player2Pos.y < (paddleH / 3.0f + paddleW))
 		{
-			player2Pos.y += paddleH / 3.0f + paddleW;
+			player2Pos.y = paddleH / 3.0f + paddleW;
 		}
 		//down off the screen
 		else if (player2Pos.y > (screenH - paddleH / 2.0f - paddleW))
 		{
-			player2Pos.y += (screenH - paddleH / 2.0f - paddleW);
+			player2Pos.y = (screenH - paddleH / 2.0f - paddleW);
 		}
 
 		
@@ -242,13 +229,14 @@ void Game::UpdateGame()
 		if (ballPos.x > screenW)
 		{
 			//player one wins
-			
-			isRunning = false;
+			//std::cout << "Left paddle wins!" << std::endl;
+			//isRunning = false;
 		}
 		else if(ballPos.x < 0.0f)
 		{
 			//player two wins
-			isRunning = false;
+			//std::cout << "Right paddle wins!" << std::endl;
+			//isRunning = false;
 		}
 
 }
