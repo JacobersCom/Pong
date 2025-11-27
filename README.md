@@ -4,7 +4,7 @@ I made this game for fun because I was bored one day and wanted to stop using ga
 
 
 ## Demo
- ![Pong](D:/ScreensShots/pong.png)
+ ![Pong](pong.png)
 
 The game does not start till the user presses 1, than the ball will begin to move to the top right of the screen.
 
