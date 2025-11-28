@@ -10,6 +10,7 @@ C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeSystemSpecificInitialize.cma
 C:/Program Files/CMake/share/cmake-4.1/Modules/Compiler/CMakeCommonCompilerMacros.cmake
 C:/Program Files/CMake/share/cmake-4.1/Modules/Compiler/MSVC-CXX.cmake
 C:/Program Files/CMake/share/cmake-4.1/Modules/Compiler/MSVC.cmake
+C:/Program Files/CMake/share/cmake-4.1/Modules/FeatureSummary.cmake
 C:/Program Files/CMake/share/cmake-4.1/Modules/Internal/CMakeCXXLinkerInformation.cmake
 C:/Program Files/CMake/share/cmake-4.1/Modules/Internal/CMakeCommonLinkerInformation.cmake
 C:/Program Files/CMake/share/cmake-4.1/Modules/Linker/MSVC-CXX.cmake
@@ -25,3 +26,6 @@ D:/dev/Pong/CMakeLists.txt
 D:/dev/Pong/build/CMakeFiles/4.1.2/CMakeCXXCompiler.cmake
 D:/dev/Pong/build/CMakeFiles/4.1.2/CMakeRCCompiler.cmake
 D:/dev/Pong/build/CMakeFiles/4.1.2/CMakeSystem.cmake
+D:/vslibs/SDL3/cmake/SDL3Config.cmake
+D:/vslibs/SDL3/cmake/SDL3ConfigVersion.cmake
+D:/vslibs/SDL3/cmake/sdlcpu.cmake

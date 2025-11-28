@@ -87,6 +87,9 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO:STRING=/debug /INCREMENTAL
 //Path to a program.
 CMAKE_MT:FILEPATH=CMAKE_MT-NOTFOUND
 
+//No help, variable specified on the command line.
+CMAKE_PREFIX_PATH:UNINITIALIZED=D:\vslibs\SDL3
+
 //Value Computed by CMake
 CMAKE_PROJECT_COMPAT_VERSION:STATIC=
 
@@ -178,6 +181,36 @@ Pong_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
 Pong_SOURCE_DIR:STATIC=D:/dev/Pong
+
+//The directory containing a CMake configuration file for SDL3.
+SDL3_DIR:PATH=D:/vslibs/SDL3/cmake
+
+//Detected architecture ARM32
+SDL_CPU_ARM32:BOOL=0
+
+//Detected architecture ARM64
+SDL_CPU_ARM64:BOOL=0
+
+//Detected architecture ARM64EC
+SDL_CPU_ARM64EC:BOOL=0
+
+//Detected architecture EMSCRIPTEN
+SDL_CPU_EMSCRIPTEN:BOOL=0
+
+//Detected architecture LOONGARCH64
+SDL_CPU_LOONGARCH64:BOOL=0
+
+//Detected architecture POWERPC32
+SDL_CPU_POWERPC32:BOOL=0
+
+//Detected architecture POWERPC64
+SDL_CPU_POWERPC64:BOOL=0
+
+//Detected architecture X64
+SDL_CPU_X64:BOOL=1
+
+//Detected architecture X86
+SDL_CPU_X86:BOOL=0
 
 
 ########################
@@ -300,4 +333,6 @@ CMAKE_STATIC_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//Result of TRY_COMPILE
+SDL_CPU_CHECK_ALL:INTERNAL=TRUE
 

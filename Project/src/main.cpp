@@ -5,7 +5,7 @@
 //Then go into create a controller service.
 //Everything should be a service.
 
-int main(int argc, char* argv[]) {
+int main() {
 
 	Game game;
 

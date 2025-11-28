@@ -1,15 +1,28 @@
+
 add_executable(Pong main.cpp)
 
 target_link_libraries(Pong PRIVATE Project)
 
-if(WIN32)
-	set (SDL3_DLL "${CMAKE_CURRENT_SOURCE_DIR}/Project/deps/SDL3.dll")
-	if(EXISTS "${SDL3_DLL})
-		add_custom_command(TARGET Pong POST_BUILD COMMMAND ${CMAKE_COMMAND} 
-		-E copy_if_different "${SDL3_DLL}"
-		$<TARGET_FILE_DIR:Pong>
-		COMMENT "Copying SDL3.dll next to Pong.exe
+
+set(
+	CMAKE_RUNTIME_OUTPUT_DIRECTORY
+	"${CMAKE_BINARY_DIR}/$<CONFIGURATION>"
+)
+set(
+	CMAKE_LIBRARY_OUTPUT_DIRECTORY
+	"${CMAKE_BINARY_DIR}/$<CONFIGURATION>"
+)
+
+if(APPLE)
+	set_target_properties(Pong PROPERTIES
+	INSTALL_RPATH "@executable_path;@loader_path"
+	BUILD_WITH_INSTALL_RPATH TRUE
+	MACOSX_RPATH TRUE
 	)
-	endif()
+elseif(UNIX)
+	set_target_properties(Pong PROPERTIES
+	INSTALL_RPATH "@ORIGIN"
+	BUILD_WITH_INSTALL_RPATH TRUE
+	)
 endif()
 		

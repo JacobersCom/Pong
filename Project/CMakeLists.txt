@@ -3,6 +3,7 @@ add_library(Project
 	includes/Defines.h
 	includes/Game.h
 	src/Game.cpp
+	src/main.cpp
 )
 
 target_include_directories(Project
@@ -12,7 +13,6 @@ target_include_directories(Project
 )
 
 target_link_libraries(Project
-	
 	PUBLIC
-		SDL3::SDL3		
+	SDL3::SDL3
 )
