@@ -16,3 +16,11 @@ That my friends is pong.
 P.S when a person wins the game the game loop stops and the window will be closed. I did not want to add text rendering to this project.
 
 
+## How to get Pong on you're system
+To play Pong open the CLI and clone `git clone https://github.com/JacobersCom/Pong.git`
+
+Than move into the Pong dir and run this command `cmake -S . -B build -DCMAKE_PREFIX_PATH="C:\Path\to\SDL3"` replace Path\to\SDL3 with the file path to SDL3 on you're system
+
+Than run `cmake --build build` and the exe to play the game will be in `Pong\build\Game\Debug`
+
+Have fun and thank you for playing!!
