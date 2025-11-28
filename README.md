@@ -17,6 +17,9 @@ P.S when a person wins the game the game loop stops and the window will be close
 
 
 ## How to get Pong on you're system
+
+First make sure SDL3 is installed on you'r systme. If not here is the link to go download it `https://github.com/libsdl-org/SDL/releases`
+
 To play Pong open the CLI and clone `git clone https://github.com/JacobersCom/Pong.git`
 
 Than move into the Pong dir and run this command `cmake -S . -B build -DCMAKE_PREFIX_PATH="C:\Path\to\SDL3"` replace Path\to\SDL3 with the file path to SDL3 on you're system
