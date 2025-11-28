@@ -1,4 +1,0 @@
-D:/dev/Pong/build/CMakeFiles/ALL_BUILD.dir
-D:/dev/Pong/build/CMakeFiles/ZERO_CHECK.dir
-D:/dev/Pong/build/Project/CMakeFiles/Project.dir
-D:/dev/Pong/build/Game/CMakeFiles/Pong.dir

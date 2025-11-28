@@ -1,9 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"D:/dev/Pong/build/cmake_install.cmake",
-		"D:/dev/Pong/build/Project/cmake_install.cmake",
-		"D:/dev/Pong/build/Game/cmake_install.cmake"
-	],
-	"Parallel" : false
-}
